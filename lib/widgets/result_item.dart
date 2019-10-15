@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:random_color/random_color.dart';
 
 import './icon_field.dart';
 import '../models/result.dart';
@@ -25,16 +24,19 @@ class ResultItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /* This thumbnail is just a placeholder for where the actual thumbnail image would go.
-    This placeholder is being used as there is currently an issue with accessing the actual images in the sandbox environment. 
-    */
     final thumbnail = Container(
-      alignment: FractionalOffset.centerLeft,
-      child: Icon(
-        Icons.photo,
-        // Using a random color to represent how the thumbnail serves as a visual differentiator between list items
-        color: RandomColor().randomColor(),
-        size: 92.0,
+      alignment: Alignment.centerLeft,
+      width: 92,
+      padding: EdgeInsets.symmetric(vertical: 20),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(width: 0),
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          image: DecorationImage(
+            image: NetworkImage(result.imageUrl),
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
 

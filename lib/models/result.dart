@@ -1,7 +1,8 @@
 import 'package:intl/intl.dart';
+import 'dart:math' show Random;
 
 class Result {
-  String itemId = '';
+  String itemId;
   String title;
   String globalId;
   String subtitle;
@@ -14,7 +15,12 @@ class Result {
   SellingStatus sellingStatus;
   String returnsAccepted;
   Condition condition;
-  String imageUrl = 'https://picsum.photos/500';
+  /* 
+  Using a randomly generated lorem ipsum image for the detail view for demo purposes.
+  There is currently a known issue on the ebay developer forums regarding
+  accessing the actual images from the galleryURL in the sandbox environment.
+  */
+  String imageUrl;
 
   get duration {
     Duration calculatedDuration = Duration();
@@ -92,6 +98,10 @@ class Result {
     if (json['condition']?.first != null) {
       condition = Condition.fromJson(json['condition'].first);
     }
+
+    // Integer between 0 and 100 (0 can be 100 not)
+    final num = Random().nextInt(100);
+    imageUrl = 'https://picsum.photos/id/$num/500';
   }
 }
 

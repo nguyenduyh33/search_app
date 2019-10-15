@@ -21,7 +21,7 @@ class ResultDetailScreen extends StatelessWidget {
         Container(
           height: MediaQuery.of(context).size.height * 0.5,
           width: double.infinity,
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(result.imageUrl),
               fit: BoxFit.fitHeight,
@@ -34,12 +34,12 @@ class ResultDetailScreen extends StatelessWidget {
           alignment: Alignment.topRight,
           child: Container(
             padding: const EdgeInsets.all(20),
-            decoration: new BoxDecoration(
-              border: new Border.all(color: Theme.of(context).primaryColor),
+            decoration: BoxDecoration(
+              border: Border.all(color: Theme.of(context).primaryColor),
               color: Colors.black87,
               borderRadius: BorderRadius.circular(5.0),
             ),
-            child: new Text(
+            child: Text(
               '\$${result?.price}',
               style: TextStyle(color: Theme.of(context).primaryColor),
             ),

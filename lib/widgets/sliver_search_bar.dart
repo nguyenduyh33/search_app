@@ -100,7 +100,7 @@ class _SliverSearchBarState extends State<SliverSearchBar> {
       flexibleSpace: Stack(children: <Widget>[
         Container(
           width: double.infinity,
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/alvord4.jpg'),
               fit: BoxFit.cover,
