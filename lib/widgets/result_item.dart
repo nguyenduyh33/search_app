@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:random_color/random_color.dart';
 
+import './icon_field.dart';
 import '../models/result.dart';
 import '../screens/result_detail_screen.dart';
 
@@ -11,11 +13,11 @@ class ResultItem extends StatelessWidget {
     @required this.result,
   }) : super(key: key);
 
-  void selectResult(BuildContext ctx) {
-    Navigator.of(ctx).push(
+  void _selectResult(BuildContext context) {
+    Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) {
-          return ResultDetailScreen(result.id, result.title);
+          return ResultDetailScreen(result.itemId);
         },
       ),
     );
@@ -23,59 +25,48 @@ class ResultItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final thumbnail = new Container(
+    /* This thumbnail is just a placeholder for where the actual thumbnail image would go.
+    This placeholder is being used as there is currently an issue with accessing the actual images in the sandbox environment. 
+    */
+    final thumbnail = Container(
       alignment: FractionalOffset.centerLeft,
       child: Icon(
         Icons.photo,
-        color: Theme.of(context).accentColor,
+        // Using a random color to represent how the thumbnail serves as a visual differentiator between list items
+        color: RandomColor().randomColor(),
         size: 92.0,
       ),
     );
 
-    final baseTextStyle = const TextStyle(fontFamily: 'Poppins');
-    final regularTextStyle = baseTextStyle.copyWith(
-      color: const Color(0xffb6b2df),
-      // fontSize: 12.0,
-      fontWeight: FontWeight.w400,
-    );
-    final headerTextStyle = baseTextStyle.copyWith(
-      color: Colors.white,
-      fontSize: 14,
-      fontWeight: FontWeight.w600,
-    );
-
-    Widget _resultValue({String value, IconData icon}) {
-      return new Row(children: <Widget>[
-        Icon(icon, size: 14, color: Theme.of(context).primaryColorLight),
-        new Container(width: 8.0),
-        new Text(value, style: regularTextStyle),
-      ]);
-    }
-
-    final cardContent = new Container(
-      margin: new EdgeInsets.fromLTRB(64.0, 16.0, 16.0, 16.0),
-      child: new Column(
+    final cardContent = Container(
+      margin: const EdgeInsets.fromLTRB(62, 16, 16, 16),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
             flex: 2,
             child: Text(
               result.title,
-              style: headerTextStyle,
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
-              // softWrap: false,
             ),
           ),
           Expanded(
             flex: 1,
-            child: new Row(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                new Expanded(
-                    child: _resultValue(
-                        value: result.price, icon: Icons.attach_money)),
-                new Expanded(
-                    child: _resultValue(value: '10 days', icon: Icons.timer))
+                IconField(
+                  text: result.price,
+                  iconData: Icons.attach_money,
+                ),
+                IconField(
+                  text: '${result?.timeLeftSummary} left',
+                  iconData: Icons.timer,
+                  color: result.isExpiringWithin24Hours
+                      ? Colors.red
+                      : Colors.black,
+                ),
               ],
             ),
           ),
@@ -84,23 +75,20 @@ class ResultItem extends StatelessWidget {
     );
 
     final card = Card(
-      margin: new EdgeInsets.only(left: 46.0),
+      margin: const EdgeInsets.only(left: 46.0),
       child: cardContent,
-      // color: Color(0xFF333366),
-      color: Theme.of(context).primaryColorDark,
+      color: Theme.of(context).primaryColor,
     );
 
     return InkWell(
-      onTap: () => selectResult(context),
-      splashColor: Theme.of(context).primaryColor,
-      borderRadius: BorderRadius.circular(15),
-      child: new Container(
-          height: 120.0,
+      onTap: () => _selectResult(context),
+      child: Container(
+          height: 120,
           margin: const EdgeInsets.symmetric(
-            vertical: 16.0,
-            horizontal: 24.0,
+            vertical: 16,
+            horizontal: 24,
           ),
-          child: new Stack(
+          child: Stack(
             children: <Widget>[
               card,
               thumbnail,

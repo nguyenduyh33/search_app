@@ -10,13 +10,30 @@ class SliverResultList extends StatelessWidget {
     final resultsData = Provider.of<Results>(context);
     final results = resultsData.results;
 
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return ResultItem(result: results[index]);
-        },
-        childCount: results.length,
-      ),
-    );
+    return results.length > 0
+        ? SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return ResultItem(result: results[index]);
+              },
+              childCount: results.length,
+            ),
+          )
+        : SliverFillRemaining(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'No results',
+                    style: TextStyle(
+                      fontSize: Theme.of(context).textTheme.title.fontSize,
+                    ),
+                  ),
+                  Text('Try a synonym or more general words')
+                ],
+              ),
+            ),
+          );
   }
 }

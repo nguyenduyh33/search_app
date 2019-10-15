@@ -8,7 +8,6 @@ import './providers/results.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -16,10 +15,19 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Colors.white,
+          primaryColorLight: Colors.white,
+          primaryColorDark: Color.fromRGBO(204, 204, 204, 1.0),
+          accentColor: Colors.black,
           fontFamily: 'Poppins',
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
         ),
-        home: HomeScreen(title: 'Search eBay'),
+        home: HomeScreen(),
       ),
     );
   }
