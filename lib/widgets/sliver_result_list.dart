@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/results.dart';
 import './result_item.dart';
+import './creation_aware_list_item.dart';
 
 class SliverResultList extends StatelessWidget {
   @override
@@ -14,7 +15,12 @@ class SliverResultList extends StatelessWidget {
         ? SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return ResultItem(result: results[index]);
+                return CreationAwareListItem(
+                    child: ResultItem(result: results[index]),
+                    onCreation: () {
+                      Provider.of<Results>(context, listen: false)
+                          .handleResultBuilt(index);
+                    });
               },
               childCount: results.length,
             ),

@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 class IconField extends StatelessWidget {
   final String text;
   final IconData iconData;
-  final bool stack;
+  final bool vertical;
   final Color color;
 
-  const IconField({this.text, this.color, this.iconData, this.stack = false});
+  const IconField({
+    @required this.iconData,
+    @required this.text,
+    this.color,
+    this.vertical = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +45,6 @@ class IconField extends StatelessWidget {
       );
     }
 
-    return stack ? buildColumn() : buildRow();
+    return vertical ? buildColumn() : buildRow();
   }
 }

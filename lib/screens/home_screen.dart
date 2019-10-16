@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     try {
       await Provider.of<Results>(context, listen: false)
-          .findItemsByKeywords(searchTerm);
+          .executeNewSearch(searchTerm);
     } catch (error) {
       await showDialog(
           context: context,
@@ -60,14 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: CircularProgressIndicator(),
                   ),
                 )
-              // : SliverResultList()
               : isEmpty(_currentSearchTerm)
                   ? SliverFillRemaining(
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.all(50),
                           child: Text(
-                            'Try searching for something on eBay!',
+                            'The results could be endless...',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize:

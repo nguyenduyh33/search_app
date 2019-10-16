@@ -99,7 +99,6 @@ class Result {
       condition = Condition.fromJson(json['condition'].first);
     }
 
-    // Integer between 0 and 100 (0 can be 100 not)
     final num = Random().nextInt(100);
     imageUrl = 'https://picsum.photos/id/$num/500';
   }

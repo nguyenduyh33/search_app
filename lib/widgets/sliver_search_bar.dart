@@ -42,8 +42,6 @@ class _SliverSearchBarState extends State<SliverSearchBar> {
   }
 
   void _handleFocus() {
-    print(_focusNode.hasFocus);
-
     setState(() {
       if (_focusNode.hasFocus) {
         _showClearButton = _textFieldController.text.isNotEmpty;

@@ -16,7 +16,7 @@ class ResultDetailScreen extends StatelessWidget {
       listen: false,
     ).findById(resultId);
 
-    final topContent = Stack(
+    final _topContent = Stack(
       children: <Widget>[
         Container(
           height: MediaQuery.of(context).size.height * 0.5,
@@ -48,7 +48,7 @@ class ResultDetailScreen extends StatelessWidget {
       ],
     );
 
-    final titleSection = Container(
+    final _titleSection = Container(
       padding: const EdgeInsets.all(16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,10 +73,13 @@ class ResultDetailScreen extends StatelessWidget {
                     ? Text(
                         'Condition: ${result.condition.conditionDisplayName}')
                     : Container(),
+                isNotEmpty(result?.location)
+                    ? Text('Location: ${result.location}')
+                    : Container(),
                 isNotEmpty(result?.subtitle)
                     ? Container(
-                        padding: const EdgeInsets.all(16),
-                        child: Text('Test', softWrap: true),
+                        margin: const EdgeInsets.symmetric(vertical: 16),
+                        child: Text(result?.subtitle, softWrap: true),
                       )
                     : Container(),
               ],
@@ -88,22 +91,18 @@ class ResultDetailScreen extends StatelessWidget {
                   ? Colors.red
                   : Theme.of(context).accentColor,
               iconData: Icons.timer,
-              stack: true),
+              vertical: true),
         ],
       ),
     );
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: Text('Back'),
-        titleSpacing: 0,
-      ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            topContent,
-            titleSection,
+            _topContent,
+            _titleSection,
           ],
         ),
       ),

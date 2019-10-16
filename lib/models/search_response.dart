@@ -40,10 +40,10 @@ class SearchResult {
 }
 
 class PaginationOutput {
-  String pageNumber;
-  String entriesPerPage;
-  String totalPages;
-  String totalEntries;
+  int pageNumber;
+  int entriesPerPage;
+  int totalPages;
+  int totalEntries;
 
   PaginationOutput(
       {this.pageNumber,
@@ -52,9 +52,9 @@ class PaginationOutput {
       this.totalEntries});
 
   PaginationOutput.fromJson(Map<String, dynamic> json) {
-    pageNumber = json['pageNumber']?.first;
-    entriesPerPage = json['entriesPerPage']?.first;
-    totalPages = json['totalPages']?.first;
-    totalEntries = json['totalEntries']?.first;
+    pageNumber = int?.parse(json['pageNumber']?.first);
+    entriesPerPage = int?.parse(json['entriesPerPage']?.first);
+    totalPages = int?.parse(json['totalPages']?.first);
+    totalEntries = int?.parse(json['totalEntries']?.first);
   }
 }
